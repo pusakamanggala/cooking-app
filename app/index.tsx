@@ -1,63 +1,68 @@
-import React from 'react';
-import Gradient from '@/assets/icons/Gradient';
-import Logo from '@/assets/icons/Logo';
-import { Box } from '@/components/ui/box';
-import { ScrollView } from 'react-native';
-import { Text } from '@/components/ui/text';
+import React from "react";
+import { Dimensions, Image } from "react-native";
+import { Box } from "@/components/ui/box";
+import { Button, ButtonText } from "@/components/ui/button";
+import { Heading } from "@/components/ui/heading";
+import { Link } from "expo-router";
+import { Text } from "@/components/ui/text";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Button, ButtonText } from '@/components/ui/button';
-import { useRouter } from 'expo-router';
-import { Icon } from '@/components/ui/icon';
+const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
-const FeatureCard = ({ iconSvg: IconSvg, name, desc }: any) => {
+export default function Onboarding() {
   return (
-    <Box
-      className="flex-column md:flex-1 m-2 p-4 rounded-lg bg-background-0/40"
-      key={name}
-    >
-      <Box className="items-center flex flex-row">
-        <Icon as={IconSvg}/>
-        <Text className="font-medium ml-2 text-xl">{name}</Text>
-      </Box>
-      <Text className="mt-2">{desc}</Text>
-    </Box>
-  );
-};
+    <Box className="relative flex-1 overflow-hidden bg-brand-secondary">
+      {/* background pattern */}
+      <Image
+        source={require("../assets/images/pattern.png")}
+        resizeMode="cover"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: screenWidth,
+          height: screenHeight,
+        }}
+      />
 
-export default function Home() {
-  const router = useRouter();
-  return (
-    <Box className="flex-1 bg-background-300 h-[100vh]">
-        <Box className="absolute h-[500px] w-[500px] lg:w-[700px] lg:h-[700px]">
-          <Gradient />
-        </Box>
-      {/* <ScrollView
-        style={{ height: '100%' }}
-        contentContainerStyle={{ flexGrow: 1 }}
-      > */}
-        <Box className="flex flex-1 items-center mx-5 lg:my-24 lg:mx-32 py-safe">
-          <Box className="gap-10 base:flex-col sm:flex-row justify-between sm:w-[80%] md:flex-1">
-            <Box className="bg-background-template py-2 px-6 rounded-full items-center flex-column md:flex-row md:self-start">
-              <Text className="text-white font-medium">
-                Get started by editing
+      <SafeAreaView className="flex-1">
+        <Box className="items-center justify-between flex-1 px-6 py-8">
+          {/* Top right "Later" link */}
+          <Box className="items-end w-full">
+            <Link href="/home">
+              <Text className="font-semibold text-white" size="xl">
+                Later
               </Text>
-              <Text className="text-white font-medium ml-2">./App.tsx or ./app/index.tsx (or whatever entry point you have)</Text>
-            </Box>
-            <Button
-              size="md"
-              className="bg-primary-500 px-6 py-2 rounded-full"
-              onPress={() => {
-                router.push('/tabs/tab1');
-              }}
-            >
-              <ButtonText>Explore Tab Navigation</ButtonText>
-            </Button>
+            </Link>
           </Box>
-          <Box className="flex-1 justify-center items-center h-[20px] w-[300px] lg:h-[160px] lg:w-[400px]">
-            <Logo />
+
+          {/* Main illustration */}
+          <Image
+            className="w-full h-auto"
+            source={require("../assets/images/food-illustration.png")}
+            resizeMode="contain"
+          />
+
+          {/* Bottom section */}
+          <Box className="flex gap-6" style={{ marginBottom: 100 }}>
+            <Heading size="2xl" className="font-sans text-center text-white">
+              Help your path to health goals with happiness
+            </Heading>
+            <Box className="flex items-center gap-4">
+              <Link href="/home" asChild>
+                <Button className="w-full p-4 rounded-2xl h-fit bg-brand-primary">
+                  <ButtonText size="md">Login</ButtonText>
+                </Button>
+              </Link>
+              <Link href="/home">
+                <Text size="lg" className="font-semibold text-white">
+                  Create New Account
+                </Text>
+              </Link>
+            </Box>
           </Box>
         </Box>
-      {/* </ScrollView> */}
+      </SafeAreaView>
     </Box>
   );
 }
