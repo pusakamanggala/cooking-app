@@ -29,7 +29,7 @@ export default function Onboarding() {
         <Box className="items-center justify-between flex-1 px-6 py-8">
           {/* Top right "Later" link */}
           <Box className="items-end w-full">
-            <Link href="/home">
+            <Link href="/(tabs)/home">
               <Text className="font-semibold text-white" size="xl">
                 Later
               </Text>
@@ -49,12 +49,12 @@ export default function Onboarding() {
               Help your path to health goals with happiness
             </Heading>
             <Box className="flex items-center gap-4">
-              <Link href="/home" asChild>
+              <Link href="/(tabs)/home" asChild>
                 <Button className="w-full p-4 rounded-2xl h-fit bg-brand-primary">
                   <ButtonText size="md">Login</ButtonText>
                 </Button>
               </Link>
-              <Link href="/home">
+              <Link href="/(tabs)/home">
                 <Text size="lg" className="font-semibold text-white">
                   Create New Account
                 </Text>
